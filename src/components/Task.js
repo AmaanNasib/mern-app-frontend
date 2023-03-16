@@ -29,7 +29,7 @@ const Task = () => {
 
   const getTask = async () =>{
     try {
-      const {data} = await axios.get(`${URL}/api/tasks`);
+      const {data} = await axios.get(`https://mern-app-api-jhym.onrender.com/api/tasks`);
       setGetTasks(data)
     } catch (error) {
       toast.error(error.message)
@@ -59,7 +59,7 @@ const Task = () => {
 
     try {
       console.log(taskId)
-      await axios.put(`${URL}/api/tasks/${taskId}`, formData)
+      await axios.put(`https://mern-app-api-jhym.onrender.com/api/tasks/${taskId}`, formData)
       setFormData({...formData, name:""})
       seteditCheck(false)
       getTask()
@@ -78,8 +78,8 @@ const Task = () => {
     }
     try {
       const valid = val._id
-      console.log(`${URL}/api/tasks/${valid}`)
-      await axios.put(`${URL}/api/tasks/${valid}`, newFormData)
+      console.log(`https://mern-app-api-jhym.onrender.com/api/tasks/${valid}`)
+      await axios.put(`https://mern-app-api-jhym.onrender.com/api/tasks/${valid}`, newFormData)
       getTask()
     } catch (error) {
       toast.error(error.message)
@@ -88,7 +88,7 @@ const Task = () => {
 
   const deleteTask = async (id) => {
     try {
-      await axios.delete(`${URL}/api/tasks/${id}`)
+      await axios.delete(`https://mern-app-api-jhym.onrender.com/api/tasks/${id}`)
       getTask()
     } catch (error) {
       toast.error(error.message)
@@ -100,7 +100,7 @@ const Task = () => {
       return toast.error("Input field is empty")
     }
     try {
-      await axios.post(`${URL}/api/tasks`, formData)
+      await axios.post(`https://mern-app-api-jhym.onrender.com/api/tasks`, formData)
       setFormData({...formData, name: ""})
       toast.success("Data Inserted")
       getTask()
