@@ -6,6 +6,7 @@ import axios from "axios"
 // import { URL } from "../App"
 
 const Task = () => {
+    const URL = process.env.URL
   const [getTasks, setGetTasks] = useState([])
 
   const [formData, setFormData] = useState({
@@ -28,7 +29,7 @@ const Task = () => {
 
   const getTask = async () =>{
     try {
-      const {data} = await axios.get("http://localhost:5000/api/tasks");
+      const {data} = await axios.get(`${URL}/api/tasks`);
       setGetTasks(data)
     } catch (error) {
       toast.error(error.message)
@@ -58,7 +59,7 @@ const Task = () => {
 
     try {
       console.log(taskId)
-      await axios.put(`http://localhost:5000/api/tasks/${taskId}`, formData)
+      await axios.put(`${URL}/api/tasks/${taskId}`, formData)
       setFormData({...formData, name:""})
       seteditCheck(false)
       getTask()
@@ -77,8 +78,8 @@ const Task = () => {
     }
     try {
       const valid = val._id
-      console.log(`http://localhost:5000/api/tasks/${valid}`)
-      await axios.put(`http://localhost:5000/api/tasks/${valid}`, newFormData)
+      console.log(`${URL}/api/tasks/${valid}`)
+      await axios.put(`${URL}/api/tasks/${valid}`, newFormData)
       getTask()
     } catch (error) {
       toast.error(error.message)
@@ -87,7 +88,7 @@ const Task = () => {
 
   const deleteTask = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/tasks/${id}`)
+      await axios.delete(`${URL}/api/tasks/${id}`)
       getTask()
     } catch (error) {
       toast.error(error.message)
@@ -99,7 +100,7 @@ const Task = () => {
       return toast.error("Input field is empty")
     }
     try {
-      await axios.post(`http://localhost:5000/api/tasks`, formData)
+      await axios.post(`${URL}/api/tasks`, formData)
       setFormData({...formData, name: ""})
       toast.success("Data Inserted")
       getTask()
